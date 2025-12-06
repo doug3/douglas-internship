@@ -21,6 +21,5 @@ function App() {
   );
 }
 // Export the App component as the default export
-const fakeapp = 42; // This line is just to illustrate no other exports are present
 
 export default App;
