@@ -19,7 +19,6 @@ const HotCollections = () => {
   };
 
   useEffect(() => {
-    console.log("Fetching hot collections...");
     fetchCollections();
   }, [collections.length]);
 
