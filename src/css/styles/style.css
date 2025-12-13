@@ -15145,7 +15145,7 @@ a.btn-slider:hover {
   margin: 0 6px;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  display: inline;
 }
 
 .testi-slider .flex-control-paging li a {
@@ -15285,7 +15285,6 @@ blockquote.very-big {
   border: none;
   font-family: var(--body-font);
   text-align: center;
-  border: none;
   font-size: 32px;
   font-weight: 400;
   background: none;
