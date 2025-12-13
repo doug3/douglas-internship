@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
 import CountdownTimer from "../global/CountdownTimer";
@@ -23,7 +21,6 @@ const NewItems = () => {
   useEffect(() => {
     fetchCollections();
   }, [collections.length]);
-
 
   return (
     <section id="section-items" className="no-bottom">
@@ -98,9 +95,13 @@ const NewItems = () => {
                           <div
                             className="lazy nft__item_price skeleton-box"
                             style={{ height: "15px", width: "90px" }}
-                          ></div></div>
+                          ></div>
+                        </div>
                         <div className="nft__item_like">
-                          <div className="lazy skeleton-box" style={{ height: "15px", width: "30px" }}></div>
+                          <div
+                            className="lazy skeleton-box"
+                            style={{ height: "15px", width: "30px" }}
+                          ></div>
                         </div>
                       </div>
                     </div>
@@ -120,7 +121,7 @@ const NewItems = () => {
                           <i className="fa fa-check"></i>
                         </Link>
                       </div>
-                      {(item.expiryDate > Date.now()) && (   
+                      {item.expiryDate > Date.now() && (
                         <div className="de_countdown">
                           <CountdownTimer expiryDate={item.expiryDate} />
                         </div>
