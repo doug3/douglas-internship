@@ -4,7 +4,7 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import axios from "axios";
 
 const TopSellers = () => {
-  
+
   const [collections, setCollections] = useState([]);
 
   const fetchCollections = async () => {
@@ -60,10 +60,12 @@ const TopSellers = () => {
                             marginBottom: "5px",
                           }}
                         ></div>
+                          <div>
                         <div
                           className="skeleton-box"
                           style={{ width: "50px", height: "15px" }}
                         ></div>
+                        </div>
                       </div>
                     </li>
                   ))
