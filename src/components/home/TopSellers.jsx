@@ -4,6 +4,7 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import axios from "axios";
 
 const TopSellers = () => {
+  
   const [collections, setCollections] = useState([]);
 
   const fetchCollections = async () => {
@@ -20,7 +21,6 @@ const TopSellers = () => {
   useEffect(() => {
     fetchCollections();
   }, [collections.length]);
-
 
   return (
     <section id="section-popular" className="pb-5">
@@ -41,14 +41,29 @@ const TopSellers = () => {
                         <Link to="/author">
                           <div
                             className="lazy pp-author skeleton-box"
-                            style={{ border: '1px solid #ccc', width: '50px', height: '50px', borderRadius: '50%' }}
+                            style={{
+                              border: "1px solid #ccc",
+                              width: "50px",
+                              height: "50px",
+                              borderRadius: "50%",
+                            }}
                           ></div>
                           <i className="fa fa-check"></i>
                         </Link>
                       </div>
                       <div className="author_list_info">
-                        <div className="skeleton-box" style={{ width: '100px', height: '15px', marginBottom: '5px' }}></div>
-                        <div className="skeleton-box" style={{ width: '50px', height: '15px' }}></div>
+                        <div
+                          className="skeleton-box"
+                          style={{
+                            width: "100px",
+                            height: "15px",
+                            marginBottom: "5px",
+                          }}
+                        ></div>
+                        <div
+                          className="skeleton-box"
+                          style={{ width: "50px", height: "15px" }}
+                        ></div>
                       </div>
                     </li>
                   ))
