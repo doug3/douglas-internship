@@ -7,7 +7,7 @@ import axios from "axios";
 
 const Author = () => {
   const authorIdNumber = useParams().authorIdNumber;
-  const apiUrl = `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorIdNumber}`;
+  const apiUrl = `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?authors=${authorIdNumber}`;
 
   const [authorData, setAuthorData] = useState([]);
   useEffect(() => {
@@ -26,19 +26,24 @@ const Author = () => {
   const copyButton = () => {
     const walletText = document.getElementById("wallet").innerText;
     navigator.clipboard.writeText(walletText);
-    alert("Wallet address copied to clipboard!");
+    alert(`Wallet address copied to clipboard: \n\n${walletText}`);
   };
 
   const followButton = () => {
-    const followersCount = document.getElementsByClassName("profile_follower")[0];
-    let followersNumber = followersCount.innerText.split(" ")[0].replace(/,/g, '');
-    followersNumber = parseInt(followersNumber, 10);
     const followBtn = document.getElementById("btn_follow");
+    const followersCount =
+      document.getElementsByClassName("profile_follower")[0];
+    let followersNumber = followersCount.innerText.split(" ")[0];
+
+    followersNumber = parseInt(followersNumber, 10);
+
     if (followBtn.innerText === "Follow") {
       followersNumber += 1;
       followBtn.innerText = "Unfollow";
     } else {
-      if (followersNumber) {followersNumber -= 1;}
+      if (followersNumber) {
+        followersNumber -= 1;
+      }
       followBtn.innerText = "Follow";
     }
     followersCount.innerText = `${followersNumber} followers`;
@@ -63,39 +68,91 @@ const Author = () => {
               <div className="col-md-12">
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
-                    <div className="profile_avatar">
-                      <img src={authorData.authorImage} alt="" />
+                    {authorData.length === 0 ? (
+                      <>
+                        <div
+                          className="profile_avatar skeleton-box"
+                          style={{
+                            width: "165px",
+                            height: "165px",
+                            borderRadius: "50%",
+                          }}
+                        >
+                          <i className="fa fa-check"></i>
+                        </div>
+                        <div className="profile_name">
+                          <h4>
+                            <div
+                              className="skeleton-box"
+                              style={{ width: "120px", height: "25px" }}
+                            ></div>
+                            <div className="profile_username">
+                              @
+                              <div
+                                className="skeleton-box"
+                                style={{ width: "80px", height: "15px" }}
+                              ></div>
+                            </div>
+                            <div id="wallet" className="profile_wallet">
+                              <div
+                                className="skeleton-box"
+                                style={{
+                                  width: "120px",
+                                  height: "15px",
+                                  marginRight: "10px",
+                                }}
+                              ></div>
+                            </div>
+                            <button
+                              id="btn_copy"
+                              title="Copy Wallet Address"
+                              style={{ cursor: "pointer" }}
+                            >
+                              Copy
+                            </button>
+                          </h4>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="profile_avatar">
+                        <img src={authorData.authorImage} alt="" />
 
-                      <i className="fa fa-check"></i>
-                      <div className="profile_name">
-                        <h4>
-                          {authorData.authorName}
-                          <span className="profile_username">
-                            @{authorData.tag}
-                          </span>
-                          <span id="wallet" className="profile_wallet">
-                            {authorData.authorWallet}
-                          </span>
-                          <button
-                            id="btn_copy"
-                            title="Copy Text"
-                            onClick={copyButton}
-                            style={{ cursor: "pointer" }}
-                          >
-                            Copy
-                          </button>
-                        </h4>
+                        <i className="fa fa-check"></i>
+                        <div className="profile_name">
+                          <h4>
+                            {authorData.authorName}
+                            <span className="profile_username">
+                              @{authorData.tag}
+                            </span>
+                            <span id="wallet" className="profile_wallet">
+                              {authorData.address}
+                            </span>
+                            <button
+                              id="btn_copy"
+                              title="Copy Wallet Address"
+                              onClick={copyButton}
+                              style={{ cursor: "pointer" }}
+                            >
+                              Copy
+                            </button>
+                          </h4>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
                       <div className="profile_follower">
-                        {authorData.followers} followers
+                        {authorData.followers || 0} followers
                       </div>
-                        <button className="btn-main" id="btn_follow" style={{ cursor: "pointer" }} onClick={followButton}>
-                          Follow
-                        </button>
+                      <button
+                        className="btn-main"
+                        id="btn_follow"
+                        style={{ cursor: "pointer" }}
+                        onClick={followButton}
+                      >
+                        Follow
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -103,7 +160,11 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems authorCollection={authorData.nftCollection} authorImage={authorData.authorImage} authorId={authorData.authorId}/>
+                  <AuthorItems
+                    authorCollection={authorData.nftCollection}
+                    authorImage={authorData.authorImage}
+                    authorId={authorData.authorId}
+                  />
                 </div>
               </div>
             </div>
