@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
-import { Link } from "react-router-dom";
+import AuthorSkeleton from "../components/global/AuthorSkeleton";
 import axios from "axios";
 
 const Author = () => {
   const authorIdNumber = useParams().authorIdNumber;
-  const apiUrl = `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?authors=${authorIdNumber}`;
+  const apiUrl = `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorIdNumber}`;
 
   const [authorData, setAuthorData] = useState([]);
   useEffect(() => {
@@ -69,50 +69,7 @@ const Author = () => {
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     {authorData.length === 0 ? (
-                      <>
-                        <div
-                          className="profile_avatar skeleton-box"
-                          style={{
-                            width: "165px",
-                            height: "165px",
-                            borderRadius: "50%",
-                          }}
-                        >
-                          <i className="fa fa-check"></i>
-                        </div>
-                        <div className="profile_name">
-                          <h4>
-                            <div
-                              className="skeleton-box"
-                              style={{ width: "120px", height: "25px" }}
-                            ></div>
-                            <div className="profile_username">
-                              @
-                              <div
-                                className="skeleton-box"
-                                style={{ width: "80px", height: "15px" }}
-                              ></div>
-                            </div>
-                            <div id="wallet" className="profile_wallet">
-                              <div
-                                className="skeleton-box"
-                                style={{
-                                  width: "120px",
-                                  height: "15px",
-                                  marginRight: "10px",
-                                }}
-                              ></div>
-                            </div>
-                            <button
-                              id="btn_copy"
-                              title="Copy Wallet Address"
-                              style={{ cursor: "pointer" }}
-                            >
-                              Copy
-                            </button>
-                          </h4>
-                        </div>
-                      </>
+                      <AuthorSkeleton />
                     ) : (
                       <div className="profile_avatar">
                         <img src={authorData.authorImage} alt="" />
