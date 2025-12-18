@@ -64,7 +64,7 @@ const ItemDetails = () => {
                         </div>
                       </div>
                       <div
-                        className="skeleton-box"
+                        className="skeleton-box" 
                         style={{
                           width: "100%",
                           height: "80px",
