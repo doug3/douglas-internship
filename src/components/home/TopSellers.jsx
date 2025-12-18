@@ -23,7 +23,7 @@ const TopSellers = () => {
 
   return (
     <section id="section-popular" className="pb-5">
-      <div className="container">
+      <div className="container" data-aos="fade-in" data-aos-delay="800" data-aos-duration="1000">
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
@@ -37,7 +37,6 @@ const TopSellers = () => {
                 ? new Array(12).fill(0).map((_, index) => (
                     <li key={index}>
                       <div className="author_list_pp">
-                        <Link to="/author">
                           <div
                             className="lazy pp-author skeleton-box"
                             style={{
@@ -48,7 +47,6 @@ const TopSellers = () => {
                             }}
                           ></div>
                           <i className="fa fa-check"></i>
-                        </Link>
                       </div>
                       <div className="author_list_info">
                         <div
