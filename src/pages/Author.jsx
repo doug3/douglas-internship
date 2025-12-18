@@ -63,7 +63,7 @@ const Author = () => {
         ></section>
 
         <section aria-label="section">
-          <div className="container">
+          <div className="container" data-aos="fade-in" data-aos-delay="800" data-aos-duration="1000">
             <div className="row">
               <div className="col-md-12">
                 <div className="d_profile de-flex">
